@@ -2,12 +2,16 @@
 
 using PaymentGateway.Infrastructure.Extensions;
 using PaymentGateway.ServiceDefaults;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
-
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.AddInfrastructure();
 var app = builder.Build();
@@ -23,6 +27,13 @@ app.UseHttpsRedirection();
 
 
 
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    //use scalar instead of swashbuckle
+    app.MapScalarApiReference();
+}
 
 app.MapDefaultEndpoints();
 
