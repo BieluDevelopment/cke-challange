@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Packages.props" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Test/">
+    <Project Path="tests/PaymentGateway.IntegrationTests/PaymentGateway.IntegrationTests.csproj" />
+  </Folder>
+  <Project Path="src/PaymentGateway.AppHost/PaymentGateway.AppHost.csproj" />
+  <Project Path="src/PaymentGateway.BankIntegration/PaymentGateway.BankIntegration.csproj" />
+  <Project Path="src/PaymentGateway.Infrastructure/PaymentGateway.Infrastructure.csproj" />
+  <Project Path="src/PaymentGateway.ServiceDefaults/PaymentGateway.ServiceDefaults.csproj" />
+  <Project Path="src/PaymentGateway.Web/PaymentGateway.Web.csproj" />
+  <Project Path="src\PaymentGateway.Models\PaymentGateway.Models.csproj" Type="Classic C#" />
+  <Project Path="src\PaymentGateway.PersistantStorage\PaymentGateway.PersistantStorage.csproj" Type="Classic C#" />
+</Solution>
