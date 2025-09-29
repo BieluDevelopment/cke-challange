@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 
 using PaymentGateway.BankIntegration.Extensions;
+using PaymentGateway.PersistantStorage.Extensions;
 
 using Polly;
 using Polly.CircuitBreaker;
@@ -15,6 +16,7 @@ public static class HostApplicationBuilderExtensions
     public static IHostApplicationBuilder AddInfrastructure(this IHostApplicationBuilder builder)
     {
         builder.AddBankClient(SetupHttpClientWithResilience);
+        builder.AddPersistentStorage();
         return builder;
     }
 

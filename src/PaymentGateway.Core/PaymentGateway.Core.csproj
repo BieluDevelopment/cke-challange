@@ -7,7 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
       <PackageReference Include="WolverineFx" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\src\PaymentGateway.Models\PaymentGateway.Models.csproj" />
     </ItemGroup>
 
 </Project>

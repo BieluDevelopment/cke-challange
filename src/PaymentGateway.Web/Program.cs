@@ -1,11 +1,14 @@
-
+using JasperFx;
 
 using PaymentGateway.Infrastructure.Extensions;
 using PaymentGateway.ServiceDefaults;
 using Scalar.AspNetCore;
 
-var builder = WebApplication.CreateBuilder(args);
+using Wolverine;
 
+var builder = WebApplication.CreateBuilder(args);
+//setup basic Wolverine
+builder.Host.UseWolverine();
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
 builder.Services.AddControllers();
@@ -14,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.AddInfrastructure();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -37,4 +41,4 @@ if (app.Environment.IsDevelopment())
 
 app.MapDefaultEndpoints();
 
-app.Run();
+await app.RunJasperFxCommands(args);
