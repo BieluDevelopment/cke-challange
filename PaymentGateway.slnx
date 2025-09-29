@@ -7,6 +7,7 @@
   </Folder>
   <Folder Name="/Test/">
     <Project Path="tests/PaymentGateway.IntegrationTests/PaymentGateway.IntegrationTests.csproj" />
+    <Project Path="tests\PaymentGateway.UnitTests\PaymentGateway.UnitTests.csproj" Type="Classic C#" />
   </Folder>
   <Project Path="PaymentGateway.Core\PaymentGateway.Core.csproj" Type="Classic C#" />
   <Project Path="src/PaymentGateway.AppHost/PaymentGateway.AppHost.csproj" />
