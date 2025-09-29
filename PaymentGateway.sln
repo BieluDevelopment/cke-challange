@@ -2,11 +2,11 @@
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.0.0
 MinimumVisualStudioVersion = 17.8.0.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentGateway.AppHost", "src/PaymentGateway.AppHost\PaymentGateway.AppHost.csproj", "{2571F008-7320-4892-9C1D-B25E2E056568}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentGateway.AppHost", "src\PaymentGateway.AppHost\PaymentGateway.AppHost.csproj", "{2571F008-7320-4892-9C1D-B25E2E056568}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentGateway.ServiceDefaults", "src/PaymentGateway.ServiceDefaults\PaymentGateway.ServiceDefaults.csproj", "{193BB059-3003-4E2E-838A-5396E04405B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentGateway.ServiceDefaults", "src\PaymentGateway.ServiceDefaults\PaymentGateway.ServiceDefaults.csproj", "{193BB059-3003-4E2E-838A-5396E04405B4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentGateway.Web", "src/PaymentGateway.Web\PaymentGateway.Web.csproj", "{EBCEF9AD-B040-4225-9683-C5BC217E0FAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentGateway.Web", "src\PaymentGateway.Web\PaymentGateway.Web.csproj", "{EBCEF9AD-B040-4225-9683-C5BC217E0FAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

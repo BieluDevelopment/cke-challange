@@ -1,12 +1,15 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var apiService = builder.AddProject<Projects.PaymentGateway_ApiService>("apiservice")
-    .WithHttpHealthCheck("/health");
+var bankContainer = builder.AddContainer("bankSimulator", "bbyars/mountebank:2.8.1")
+    .WithBindMount("../../imposters", "/imposters")
+    .WithArgs("--configfile","/imposters/bank_simulator.ejs","--allowInjection")
+    .WithHttpEndpoint(port: 2525, targetPort:2525, name: "management", isProxied: false).WithHttpEndpoint(port: 8080, targetPort:8080, name: "imposters", isProxied: false);
+var apiService = bankContainer.GetEndpoint("imposters");
 
-builder.AddProject<Projects.PaymentGateway_Web>("webfrontend")
+builder.AddProject<Projects.PaymentGateway_Web>("payment-gateway")
     .WithExternalHttpEndpoints()
     .WithHttpHealthCheck("/health")
     .WithReference(apiService)
-    .WaitFor(apiService);
+    .WaitFor(bankContainer);
 
 builder.Build().Run();

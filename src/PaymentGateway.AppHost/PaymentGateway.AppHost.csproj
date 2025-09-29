@@ -11,7 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PaymentGateway.ApiService\PaymentGateway.ApiService.csproj" />
     <ProjectReference Include="..\PaymentGateway.Web\PaymentGateway.Web.csproj" />
   </ItemGroup>
 
