@@ -9,12 +9,13 @@
     <Project Path="tests/PaymentGateway.IntegrationTests/PaymentGateway.IntegrationTests.csproj" />
     <Project Path="tests\PaymentGateway.UnitTests\PaymentGateway.UnitTests.csproj" Type="Classic C#" />
   </Folder>
-  <Project Path="src/PaymentGateway.Core\PaymentGateway.Core.csproj" Type="Classic C#" />
   <Project Path="src/PaymentGateway.AppHost/PaymentGateway.AppHost.csproj" />
   <Project Path="src/PaymentGateway.BankIntegration/PaymentGateway.BankIntegration.csproj" />
+  <Project Path="src/PaymentGateway.Core\PaymentGateway.Core.csproj" Type="Classic C#" />
   <Project Path="src/PaymentGateway.Infrastructure/PaymentGateway.Infrastructure.csproj" />
   <Project Path="src/PaymentGateway.ServiceDefaults/PaymentGateway.ServiceDefaults.csproj" />
   <Project Path="src/PaymentGateway.Web/PaymentGateway.Web.csproj" />
+  <Project Path="src\PaymentGateway.CQRS.Web\PaymentGateway.CQRS.Web.csproj" Type="Classic C#" />
   <Project Path="src\PaymentGateway.Models\PaymentGateway.Models.csproj" Type="Classic C#" />
   <Project Path="src\PaymentGateway.PersistantStorage\PaymentGateway.PersistantStorage.csproj" Type="Classic C#" />
 </Solution>

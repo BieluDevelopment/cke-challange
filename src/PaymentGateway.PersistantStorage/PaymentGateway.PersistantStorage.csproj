@@ -8,13 +8,19 @@
 
     <ItemGroup>
       <Folder Include="Migrations\" />
-      <Folder Include="Services\" />
     </ItemGroup>
 
    
     <ItemGroup>
+        <PackageReference Include="Aspire.Npgsql" />
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
         <PackageReference Include="Microsoft.EntityFrameworkCore"  />
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions"  />
+    </ItemGroup>
+
+   
+    <ItemGroup>
+      <ProjectReference Include="..\PaymentGateway.Models\PaymentGateway.Models.csproj" />
     </ItemGroup>
 
 </Project>
