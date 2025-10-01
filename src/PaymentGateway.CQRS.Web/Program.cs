@@ -1,11 +1,6 @@
 using JasperFx;
 
-using Microsoft.EntityFrameworkCore;
-
-using PaymentGateway.Core.Extensions;
-using PaymentGateway.Core.Feature.Security.Services;
 using PaymentGateway.Infrastructure.Extensions;
-using PaymentGateway.PersistantStorage;
 using PaymentGateway.ServiceDefaults;
 using Scalar.AspNetCore;
 
@@ -19,27 +14,12 @@ builder.AddServiceDefaults();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddOpenApi(e =>
-{
-    e.AddDocumentTransformer<ApiKeySchemeTransformer>();
-    e.AddSchemaTransformer((schema, context, cancellationToken) =>
-    {
-        if (context.JsonTypeInfo.Type == typeof(decimal))
-        {
-            schema.Format = "decimal";
-        }
-        return Task.CompletedTask;
-    });
-});
+builder.Services.AddOpenApi();
+builder.Services.AddControllers();
 builder.AddInfrastructure();
-builder.AddBusinessLogic();
 
 var app = builder.Build();
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<PaymentGatewayDbContext>();
-    await db.Database.MigrateAsync();
-}
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
@@ -49,7 +29,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapControllers();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

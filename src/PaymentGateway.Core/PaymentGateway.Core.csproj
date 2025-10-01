@@ -7,12 +7,21 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="FluentResults" />
+      <PackageReference Include="FluentValidation" />
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
       <PackageReference Include="WolverineFx" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\PaymentGateway.Models\PaymentGateway.Models.csproj" />
+      <ProjectReference Include="..\PaymentGateway.BankIntegration\PaymentGateway.BankIntegration.csproj" />
+      <ProjectReference Include="..\PaymentGateway.Models\PaymentGateway.Models.csproj" />
+      <ProjectReference Include="..\PaymentGateway.PersistantStorage\PaymentGateway.PersistantStorage.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Feature\OpenTelemetry\" />
     </ItemGroup>
 
 </Project>

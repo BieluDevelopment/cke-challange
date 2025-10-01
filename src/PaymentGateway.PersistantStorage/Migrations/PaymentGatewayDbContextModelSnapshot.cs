@@ -34,7 +34,7 @@ namespace PaymentGateway.PersistantStorage.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Merchants");
+                    b.ToTable("Merchants", (string)null);
                 });
 
             modelBuilder.Entity("PaymentGateway.PersistantStorage.Dto.Payment", b =>
@@ -81,7 +81,7 @@ namespace PaymentGateway.PersistantStorage.Migrations
 
                     b.HasIndex("MerchantId");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("PaymentGateway.PersistantStorage.Dto.Payment", b =>

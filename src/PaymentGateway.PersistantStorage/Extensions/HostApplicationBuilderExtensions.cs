@@ -10,6 +10,16 @@ namespace PaymentGateway.PersistantStorage.Extensions;
 
 public static class HostApplicationBuilderExtensions
 {
+    private static IHostApplicationBuilder AddServices(this IHostApplicationBuilder builder)
+    {
+        var encryptionKey = builder.Configuration.GetValue<string>("DbSettings:EncryptionKey");
+        
+        EncryptionExtension.SetEncryptionKey(encryptionKey);
+        builder.Services.AddScoped<IPaymentsRepository, PaymentsRepository>();
+        builder.Services.AddScoped<IMerchantRepository, MerchantRepository>();
+
+        return builder;
+    }
     public static IHostApplicationBuilder AddPersistentStorage(this IHostApplicationBuilder builder)
     {
         var localConnectionString = builder.Configuration.GetConnectionString("postgressDb");
@@ -17,10 +27,28 @@ public static class HostApplicationBuilderExtensions
 
         builder.Services.AddDbContextFactory<PaymentGatewayDbContext>(( options) =>
         {
-            options.UseNpgsql(localConnectionString);
-        }, ServiceLifetime.Scoped);
-        builder.Services.AddSingleton<IPaymentsRepository, PaymentsRepository>();
+            options.UseNpgsql(localConnectionString, e =>
+            {
+                e.EnableRetryOnFailure(
+                    maxRetryCount: 2,
+                    maxRetryDelay: TimeSpan.FromSeconds(30), null);
+            });
+           
+          
+        });
+        builder.AddServices();
 
+        return builder;
+    }
+    public static IHostApplicationBuilder AddInMemoryStorage(this IHostApplicationBuilder builder)
+    {
+        builder.Services.AddDbContextFactory<PaymentGatewayDbContext>(( options) =>
+        {
+            options.UseInMemoryDatabase("testDb");
+            
+        });
+     
+        builder.AddServices();
         return builder;
     }
 }

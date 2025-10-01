@@ -2,7 +2,7 @@
 
 public class BankSimulatorClientOptions
 {
-    public const string SectionName = "services__bankSimulator";
-    public IEnumerable<string> Imposters { get; set; } = [];
+    public const string SectionName = "services:bankSimulator";
+    public List<string> Imposters { get; set; } = [];
 }
 

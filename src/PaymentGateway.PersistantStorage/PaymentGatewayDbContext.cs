@@ -21,11 +21,6 @@ public class PaymentGatewayDbContext : DbContext
     public DbSet<Merchant> Merchants { get; set; }
 
     #endregion
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseNpgsql();
-        base.OnConfiguring(optionsBuilder);
-    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
