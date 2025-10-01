@@ -258,7 +258,7 @@ public class PaymentsServiceUnitTests : BaseTest
         // Arrange
         var request = new MerchantPaymentProcessRequest
         {
-            CardNumber = "2222405343248877",
+            CardNumber = "2222405343248872",
             ExpiryMonth = 4,
             ExpiryYear = 2025,
             Currency = "GBP",
@@ -274,7 +274,7 @@ public class PaymentsServiceUnitTests : BaseTest
         // Assert
         Assert.NotNull(result);
         Assert.Equal(PaymentStatus.Rejected, result.Status);
-        Assert.Equal("8877", result.CardNumberLastFour);
+        Assert.Equal("8872", result.CardNumberLastFour);
         Assert.Equal(request.Amount, result.Amount);
         Assert.Equal(request.Currency, result.Currency);
 

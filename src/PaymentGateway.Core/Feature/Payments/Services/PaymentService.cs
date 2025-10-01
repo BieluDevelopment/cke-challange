@@ -36,6 +36,7 @@ public class PaymentService(IBankClient bankClient, IPaymentsRepository payments
         }
 
         var transactionId = Guid.NewGuid();
+        var status = result.Value.Authorized ? PaymentStatus.Authorized : PaymentStatus.Declined;
       await paymentsRepository.UpsertPaymentAsync(new Payment
         {
             Id = transactionId,
@@ -48,9 +49,9 @@ public class PaymentService(IBankClient bankClient, IPaymentsRepository payments
             Name = paymentProcessRequest.Name,
             MerchantId = paymentProcessRequest.MerchantId,
             AuthorizationCode = result.Value.AuthorizationCode,
-            Status = result.Value.Authorized ? PaymentStatus.Authorized : PaymentStatus.Declined
+            Status =status 
         });
-        return Result.Ok(ToDomainModel(paymentProcessRequest,transactionId));
+        return Result.Ok(ToDomainModel(paymentProcessRequest,transactionId,status));
     }
 
     public async Task<PostPaymentResponse?> RejectPaymentAsync(MerchantPaymentProcessRequest paymentProcessRequest)
@@ -69,10 +70,10 @@ public class PaymentService(IBankClient bankClient, IPaymentsRepository payments
             MerchantId = paymentProcessRequest.MerchantId,
             Status = PaymentStatus.Rejected
         });
-        return ToDomainModel(paymentProcessRequest,transactionId);
+        return ToDomainModel(paymentProcessRequest,transactionId,PaymentStatus.Rejected);
     }
 
-    private PostPaymentResponse? ToDomainModel(MerchantPaymentProcessRequest paymentProcessRequest, Guid transactionId)
+    private PostPaymentResponse? ToDomainModel(MerchantPaymentProcessRequest paymentProcessRequest, Guid transactionId, PaymentStatus paymentStatus)
     {
         return new PostPaymentResponse()
         {
@@ -83,7 +84,7 @@ public class PaymentService(IBankClient bankClient, IPaymentsRepository payments
                 paymentProcessRequest.CardNumber.Substring(paymentProcessRequest.CardNumber.Length - 4, 4),
             ExpiryMonth = paymentProcessRequest.ExpiryMonth ?? 1,
             ExpiryYear = paymentProcessRequest.ExpiryYear,
-            Status = PaymentStatus.Rejected
+            Status = paymentStatus
         };
     }
 }
