@@ -10,14 +10,14 @@ namespace PaymentGateway.UnitTests;
 
 public abstract class BaseTest :IDisposable
 {
-    public IDbContextFactory<PaymentGatewayDbContext> PrepareSubDbContextFcatory()
+    public IDbContextFactory<PaymentGatewayDbContext> PrepareSubDbContextFactory(Guid guid)
     {
         var dbContextFactorySub = Substitute.For<IDbContextFactory<PaymentGatewayDbContext>>();
         EncryptionExtension.SetEncryptionKey("22ca492b4e814cab8d1b1dc4f0f560d4"); //unused key, only for testing
         dbContextFactorySub.CreateDbContextAsync().Returns(e=>
         {
             var options = new DbContextOptionsBuilder<PaymentGatewayDbContext>()
-                .UseInMemoryDatabase(databaseName:"test")
+                .UseInMemoryDatabase(databaseName:$"test-{guid}")
                 .Options;
             return new PaymentGatewayDbContext(options);
         });
@@ -33,7 +33,8 @@ public class MerchantRepositoryUnitTests : BaseTest
 {
     private IMerchantRepository PrepareForTest()
     {
-        return new MerchantRepository(PrepareSubDbContextFcatory());
+        Guid guid = Guid.NewGuid();
+        return new MerchantRepository(PrepareSubDbContextFactory(guid));
     }
 
     [Fact]

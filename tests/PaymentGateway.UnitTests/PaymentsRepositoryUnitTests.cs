@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 
 using NSubstitute;
@@ -15,10 +14,12 @@ public class PaymentsRepositoryUnitTests : BaseTest
 {
     private (IPaymentsRepository repository, Guid MerchantId) PrepareForTest()
     {
-        var dbContextFactorySub = PrepareSubDbContextFcatory();
-       Guid testMerchantId = Guid.NewGuid();
+        Guid guid = Guid.NewGuid();
 
-       return (new PaymentsRepository(dbContextFactorySub),testMerchantId);
+        var dbContextFactorySub = PrepareSubDbContextFactory(guid);
+        Guid testMerchantId = Guid.NewGuid();
+
+        return (new PaymentsRepository(dbContextFactorySub), testMerchantId);
     }
 
     [Fact]

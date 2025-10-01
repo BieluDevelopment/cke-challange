@@ -13,9 +13,11 @@ public class MerchantRepository(IDbContextFactory<PaymentGatewayDbContext> dbCon
         return await dbContext.Merchants.ToListAsync();
     }
 
-    public Task<Merchant?> GetMerchantAsync(Guid merchantId)
+    public async Task<Merchant?> GetMerchantAsync(Guid merchantId)
     {
-        throw new NotImplementedException();
+        await using var dbContext = await dbContextFactory.CreateDbContextAsync();
+
+        return await dbContext.Merchants.FirstOrDefaultAsync(x => x.Id == merchantId);
     }
 
     public async Task UpsertMerchantAsync(Merchant merchant)
@@ -32,15 +34,27 @@ public class MerchantRepository(IDbContextFactory<PaymentGatewayDbContext> dbCon
         await dbContext.SaveChangesAsync();
     }
 
-    public Task DeleteMerchantAsync(Guid MerchantId)
+    public async Task DeleteMerchantAsync(Guid MerchantId)
     {
-        throw new NotImplementedException();
+        await using var dbContext = await dbContextFactory.CreateDbContextAsync();
+        if (!await dbContext.Merchants.AnyAsync(x => x.Id == MerchantId))
+        {
+            return;
+        }
+
+        var paymentToDelete= await dbContext.Merchants.FirstOrDefaultAsync(x => x.Id.Equals(MerchantId));
+        if (paymentToDelete == null)
+        {
+            return;
+        }
+        dbContext.Merchants.Remove(paymentToDelete); 
+        await dbContext.SaveChangesAsync();
     }
 
     public async Task<Merchant?> GetMerchantByApiKey(string? apiKey)
     {
         await using var dbContext = await dbContextFactory.CreateDbContextAsync();
 
-        return await dbContext.Merchants.FirstOrDefaultAsync(x=>x.ApiKey==apiKey);
+        return await dbContext.Merchants.FirstOrDefaultAsync(x => x.ApiKey == apiKey);
     }
 }

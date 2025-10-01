@@ -60,9 +60,21 @@ public class PaymentsRepository(IDbContextFactory<PaymentGatewayDbContext> dbCon
         await dbContext.SaveChangesAsync();
     }
 
-    public Task DeletePaymentAsync(Guid paymentID)
+    public async Task DeletePaymentAsync(Guid paymentID)
     {
-        throw new NotImplementedException();
+        await using var dbContext = await dbContextFactory.CreateDbContextAsync();
+        if (!await dbContext.Payments.AnyAsync(x => x.Id == paymentID))
+        {
+            return;
+        }
+
+       var paymentToDelete= await dbContext.Payments.FirstOrDefaultAsync(x => x.Id.Equals(paymentID));
+       if (paymentToDelete == null)
+       {
+           return;
+       }
+       dbContext.Payments.Remove(paymentToDelete); 
+       await dbContext.SaveChangesAsync();
     }
 
    
