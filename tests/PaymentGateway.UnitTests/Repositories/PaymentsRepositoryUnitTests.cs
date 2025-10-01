@@ -1,14 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-
-using NSubstitute;
+﻿using AwesomeAssertions;
 
 using PaymentGateway.Models.Enums;
-using PaymentGateway.PersistantStorage;
 using PaymentGateway.PersistantStorage.Dto;
 using PaymentGateway.PersistantStorage.Services;
 
-namespace PaymentGateway.UnitTests;
+namespace PaymentGateway.UnitTests.Repositories;
 
 public class PaymentsRepositoryUnitTests : BaseTest
 {
@@ -330,6 +326,7 @@ public class PaymentsRepositoryUnitTests : BaseTest
         var merchant2Results = await context.repository.GetPayments(merchant2Id, pageSize: 10, page: 0);
 
         // Assert
+       
         Assert.Single(merchant1Results);
         Assert.Single(merchant2Results);
         Assert.Equal(payment1.Id, merchant1Results.First().Id);

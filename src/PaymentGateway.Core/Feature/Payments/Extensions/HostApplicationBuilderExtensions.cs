@@ -10,6 +10,7 @@ public static partial class HostApplicationBuilderExtensions
     public static IHostApplicationBuilder AddPayments(this IHostApplicationBuilder builder)
     {
         builder.Services.AddScoped<IPaymentService, PaymentService>();
+        builder.Services.Decorate<IPaymentService, PaymentServiceCacheDecorator>();
         builder.Services.AddScoped<PaymentValidator>();
         return builder;
     }

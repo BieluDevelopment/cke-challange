@@ -32,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\PaymentGateway.AppHost\PaymentGateway.AppHost.csproj" />
     <ProjectReference Include="..\..\src\PaymentGateway.BankIntegration\PaymentGateway.BankIntegration.csproj" />
+    <ProjectReference Include="..\..\src\PaymentGateway.PersistantStorage\PaymentGateway.PersistantStorage.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,34 +1,9 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using NSubstitute;
-using PaymentGateway.PersistantStorage;
-using PaymentGateway.PersistantStorage.Dto;
-using PaymentGateway.PersistantStorage.Extensions;
+﻿using PaymentGateway.PersistantStorage.Dto;
 using PaymentGateway.PersistantStorage.Services;
 
-namespace PaymentGateway.UnitTests;
+namespace PaymentGateway.UnitTests.Repositories;
 
-public abstract class BaseTest :IDisposable
-{
-    public IDbContextFactory<PaymentGatewayDbContext> PrepareSubDbContextFactory(Guid guid)
-    {
-        var dbContextFactorySub = Substitute.For<IDbContextFactory<PaymentGatewayDbContext>>();
-        EncryptionExtension.SetEncryptionKey("22ca492b4e814cab8d1b1dc4f0f560d4"); //unused key, only for testing
-        dbContextFactorySub.CreateDbContextAsync().Returns(e=>
-        {
-            var options = new DbContextOptionsBuilder<PaymentGatewayDbContext>()
-                .UseInMemoryDatabase(databaseName:$"test-{guid}")
-                .Options;
-            return new PaymentGatewayDbContext(options);
-        });
-        return dbContextFactorySub;
-    }
 
-    public void Dispose()
-    {
-        
-    }
-}
 public class MerchantRepositoryUnitTests : BaseTest
 {
     private IMerchantRepository PrepareForTest()

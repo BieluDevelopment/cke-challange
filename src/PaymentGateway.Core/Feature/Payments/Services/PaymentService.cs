@@ -23,7 +23,7 @@ public class PaymentService(IBankClient bankClient, IPaymentsRepository payments
         
         var result=  await bankClient.SendPayment(new PaymentRequest
         {
-            Amount = paymentProcessRequest.Amount,
+            Amount = paymentProcessRequest.Amount ?? 0,
             Currency = paymentProcessRequest.Currency,
             CardNumber = paymentProcessRequest.CardNumber,
             Cvv = paymentProcessRequest.Cvv,
@@ -36,14 +36,14 @@ public class PaymentService(IBankClient bankClient, IPaymentsRepository payments
         }
 
         var transactionId = Guid.NewGuid();
-        await paymentsRepository.UpsertPaymentAsync(new Payment
+      await paymentsRepository.UpsertPaymentAsync(new Payment
         {
             Id = transactionId,
-            Amount = paymentProcessRequest.Amount,
+            Amount = paymentProcessRequest.Amount ??0,
             Currency = paymentProcessRequest.Currency,
             CardNumber = paymentProcessRequest.CardNumber,
             Cvv = paymentProcessRequest.Cvv,
-            ExpiryMonth = paymentProcessRequest.ExpiryMonth,
+            ExpiryMonth = paymentProcessRequest.ExpiryMonth ?? 1,
             ExpiryYear = paymentProcessRequest.ExpiryYear,
             Name = paymentProcessRequest.Name,
             MerchantId = paymentProcessRequest.MerchantId,
@@ -59,11 +59,11 @@ public class PaymentService(IBankClient bankClient, IPaymentsRepository payments
         await paymentsRepository.UpsertPaymentAsync(new Payment
         {
             Id =transactionId,
-            Amount = paymentProcessRequest.Amount,
+            Amount = paymentProcessRequest.Amount ?? 0,
             Currency = paymentProcessRequest.Currency,
             CardNumber = paymentProcessRequest.CardNumber,
             Cvv = paymentProcessRequest.Cvv,
-            ExpiryMonth = paymentProcessRequest.ExpiryMonth,
+            ExpiryMonth = paymentProcessRequest.ExpiryMonth ??1,
             ExpiryYear = paymentProcessRequest.ExpiryYear,
             Name = paymentProcessRequest.Name,
             MerchantId = paymentProcessRequest.MerchantId,
@@ -77,11 +77,11 @@ public class PaymentService(IBankClient bankClient, IPaymentsRepository payments
         return new PostPaymentResponse()
         {
             Id = transactionId,
-            Amount = paymentProcessRequest.Amount,
+            Amount = paymentProcessRequest.Amount ?? 0,
             Currency = paymentProcessRequest.Currency,
             CardNumberLastFour =
                 paymentProcessRequest.CardNumber.Substring(paymentProcessRequest.CardNumber.Length - 4, 4),
-            ExpiryMonth = paymentProcessRequest.ExpiryMonth,
+            ExpiryMonth = paymentProcessRequest.ExpiryMonth ?? 1,
             ExpiryYear = paymentProcessRequest.ExpiryYear,
             Status = PaymentStatus.Rejected
         };
