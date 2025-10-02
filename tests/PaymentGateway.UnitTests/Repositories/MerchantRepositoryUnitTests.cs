@@ -389,8 +389,5 @@ public class MerchantRepositoryUnitTests : BaseTest
         Assert.Single(allMerchants);
     }
 
-    public void Dispose()
-    {
-        // Cleanup if needed
-    }
+  
 }

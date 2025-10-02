@@ -332,8 +332,4 @@ public class PaymentsRepositoryUnitTests : BaseTest
         Assert.Equal(payment1.Id, merchant1Results.First().Id);
         Assert.Equal(payment2.Id, merchant2Results.First().Id);
     }
-
-    public void Dispose()
-    {
-    }
 }

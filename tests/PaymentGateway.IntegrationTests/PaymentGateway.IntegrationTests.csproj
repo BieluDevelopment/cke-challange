@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" />
     <PackageReference Include="Aspire.Hosting.Testing" />
     <PackageReference Include="AwesomeAssertions" />
     <PackageReference Include="coverlet.collector" />
@@ -32,6 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\PaymentGateway.AppHost\PaymentGateway.AppHost.csproj" />
     <ProjectReference Include="..\..\src\PaymentGateway.BankIntegration\PaymentGateway.BankIntegration.csproj" />
+    <ProjectReference Include="..\..\src\PaymentGateway.Models\PaymentGateway.Models.csproj" />
     <ProjectReference Include="..\..\src\PaymentGateway.PersistantStorage\PaymentGateway.PersistantStorage.csproj" />
   </ItemGroup>
 
