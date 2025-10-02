@@ -1,6 +1,7 @@
 # Instructions to run project
 
 ## Pre-requirements
+- .NET 9 SDK installed
 - Docker installed
 - Aspire CLI installed
 
